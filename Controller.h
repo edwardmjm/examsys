@@ -1,6 +1,12 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
+#include <vector>
+#include "Problem.h"
+#include "ProblemList.h"
+#include "Record.h"
+#include "Result.h"
+
 class Controller {
 public:
     //修改题库

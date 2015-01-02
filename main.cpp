@@ -8,19 +8,12 @@
 #include <QString>
 #include <cstdio>
 #include <iostream>
-#include "Message.h"
-QQmlContext *context;
-QQmlApplicationEngine *engine;
+#include "Interacter.h"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
     QQmlApplicationEngine engine;
-    ::engine = &engine;
-    Message myObject;
-    context = engine.rootContext();
-    context->setContextProperty("MyText", "gogogo");
-    context->setContextProperty("gao", &myObject);
+    Interacter inter(engine.rootContext());
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     return app.exec();
 }

@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>ProbSubmit.qml</file>
+        <file>ProbShow.qml</file>
     </qresource>
 </RCC>

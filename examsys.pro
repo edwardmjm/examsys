@@ -6,7 +6,12 @@ SOURCES += main.cpp \
     Result.cpp \
     Record.cpp \
     ProblemList.cpp \
-    Problem.cpp
+    Problem.cpp \
+    Controller.cpp \
+    Interacter.cpp \
+    Caller.cpp \
+    UIState.cpp \
+    Util.cpp
 
 RESOURCES += qml.qrc
 
@@ -21,5 +26,8 @@ HEADERS += \
     Record.h \
     ProblemList.h \
     Problem.h \
-    Message.h \
-    Controller.h
+    Controller.h \
+    Interacter.h \
+    Caller.h \
+    UIState.h \
+    Util.h
