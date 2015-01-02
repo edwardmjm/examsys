@@ -82,7 +82,7 @@ Rectangle {
             orientation: Qt.Horizontal
             Button {
                 id: showProbPrevButton
-                text: qsTr("Prev")
+                text: qsTr("前一题")
                 width: parent.width / 3
                 onClicked: {
                     call.showProbPrev()
@@ -101,7 +101,7 @@ Rectangle {
 
             Button {
                 id: showProbNextButton
-                text: qsTr("Next")
+                text: qsTr("后一题")
                 width: parent.width / 3
                 onClicked: {
                     call.showProbNext()

@@ -4,7 +4,6 @@ using namespace std;
 
 //修改题库
 void Controller::addProblem(const Problem &p) {
-    qDebug() << p.getProblem() << "\n";
     questionBank.push_back(p);
 }
 
