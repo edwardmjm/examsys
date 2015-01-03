@@ -2,8 +2,9 @@
 #define CONTROLLER_H
 
 #include <vector>
+#include <QStringList>
 #include "Problem.h"
-#include "ProblemList.h"
+#include "Paper.h"
 #include "Record.h"
 #include "Result.h"
 
@@ -16,9 +17,9 @@ public:
 
     void removeProblem(int index);
     //修改试卷
-    void addPaper(const ProblemList &l);
+    void addPaper(Paper l);
 
-    void editPaper(int index, const ProblemList &l);
+    void editPaper(int index, const Paper &l);
 
     void removePaper(int index);
     //修改答卷
@@ -30,18 +31,20 @@ public:
 
     std::vector <Problem> &getQuestionBank();
 
-    std::vector <ProblemList> &getPaper();
+    std::vector <Paper> &getPaper();
 
     std::vector <Result> &getResult();
+
+    QStringList getPaperQStringList();
 
     void save();
 
     void load();
 
-private:
-    std::vector <Problem> questionBank; //题库
-    std::vector <ProblemList> paper;    //试卷库
-    std::vector <Result> result;        //答卷库
+    private:
+        std::vector <Problem> questionBank; //题库
+        std::vector <Paper> paper;          //试卷库
+        std::vector <Result> result;        //答卷库
 };
 
 #endif // CONTROLLER_H

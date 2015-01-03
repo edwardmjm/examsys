@@ -5,13 +5,13 @@ QT += qml quick widgets
 SOURCES += main.cpp \
     Result.cpp \
     Record.cpp \
-    ProblemList.cpp \
     Problem.cpp \
     Controller.cpp \
     Interacter.cpp \
     Caller.cpp \
     UIState.cpp \
-    Util.cpp
+    Util.cpp \
+    Paper.cpp
 
 RESOURCES += qml.qrc
 
@@ -24,10 +24,10 @@ include(deployment.pri)
 HEADERS += \
     Result.h \
     Record.h \
-    ProblemList.h \
     Problem.h \
     Controller.h \
     Interacter.h \
     Caller.h \
     UIState.h \
-    Util.h
+    Util.h \
+    Paper.h

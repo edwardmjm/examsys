@@ -3,5 +3,7 @@
         <file>main.qml</file>
         <file>ProbSubmit.qml</file>
         <file>ProbShow.qml</file>
+        <file>GenPaper.qml</file>
+        <file>Exam.qml</file>
     </qresource>
 </RCC>

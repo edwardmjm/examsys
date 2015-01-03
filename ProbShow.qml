@@ -84,6 +84,7 @@ Rectangle {
                 id: showProbPrevButton
                 text: qsTr("前一题")
                 width: parent.width / 3
+
                 onClicked: {
                     call.showProbPrev()
                     showProbSplitView.refresh()
@@ -145,6 +146,5 @@ Rectangle {
                 }
             }
         }
-
     }
 }

@@ -39,10 +39,26 @@ ApplicationWindow {
 
         Tab {
             title : qsTr("生成试卷")
+            anchors.fill: parent
+            GenPaper {
+                anchors.fill: parent
+                anchors.topMargin: 5
+                anchors.leftMargin: 50
+                anchors.rightMargin: 50
+                anchors.bottomMargin: 50
+            }
         }
 
         Tab {
             title : qsTr("考试")
+            anchors.fill: parent
+            Exam {
+                anchors.fill: parent
+                anchors.topMargin: 5
+                anchors.leftMargin: 50
+                anchors.rightMargin: 50
+                anchors.bottomMargin: 50
+            }
         }
         Tab {
             title : qsTr("评分")

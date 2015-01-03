@@ -16,11 +16,13 @@ void Controller::removeProblem(int index) {
 }
 
 //修改试卷
-void Controller::addPaper(const ProblemList &l) {
+void Controller::addPaper(Paper l) {
+    qDebug() << "add Paper!" << l.getTitle();
+    qDebug() << "size = " << l.getProb().size();
     paper.push_back(l);
 }
 
-void Controller::editPaper(int index, const ProblemList &l) {
+void Controller::editPaper(int index, const Paper &l) {
     paper[index] = l;
 }
 
@@ -45,10 +47,18 @@ std::vector <Problem> & Controller::getQuestionBank() {
     return questionBank;
 }
 
-std::vector <ProblemList> & Controller::getPaper() {
+std::vector <Paper> & Controller::getPaper() {
     return paper;
 }
 
 std::vector <Result> & Controller::getResult() {
     return result;
+}
+
+QStringList Controller::getPaperQStringList() {
+    QStringList res;
+    for (size_t i = 0; i < paper.size(); i++) {
+        res.append(paper[i].getTitle());
+    }
+    return res;
 }

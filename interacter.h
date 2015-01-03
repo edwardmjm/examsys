@@ -9,8 +9,6 @@ class Interacter {
 public:
     Interacter(QQmlContext *context);
 
-    ~Interacter();
-
 private:
     Caller call;
     Controller ctrl;
