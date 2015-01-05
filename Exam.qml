@@ -10,6 +10,10 @@ Rectangle {
         cb.model = call.comboBoxModel();
     }
 
+    Component.onCompleted: {
+        tabView.handleRefresh.connect(root.refresh)
+    }
+
     SplitView {
         id: spv1
         anchors.top: parent.top
@@ -30,12 +34,6 @@ Rectangle {
             model: call.comboBoxModel()
         }
 
-        Button {
-            text: qsTr("刷新")
-            onClicked: {
-                root.refresh()
-            }
-        }
         Button {
             text: qsTr("进入考试")
             onClicked: {

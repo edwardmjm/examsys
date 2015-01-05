@@ -8,7 +8,9 @@ Rectangle {
 
     SplitView {
         id: splitView1
-        anchors.fill: parent
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
         visible: true
         orientation: Qt.Vertical
 

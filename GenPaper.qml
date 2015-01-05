@@ -6,6 +6,23 @@ Rectangle {
     width: 538
     height: 405
 
+    function refresh() {
+        spv1.visible = (call.genPaperStep() === 1)
+        spv2.visible = (call.genPaperStep() === 2)
+        spv3.visible = (call.genPaperStep() === 3)
+        showProbTextArea1.text = call.genPaperProb()[0]
+        showProbTextField1.text = call.genPaperProb()[1]
+        showProbTextField2.text = call.genPaperProb()[2]
+        showProbTextField3.text = call.genPaperProb()[3]
+        showProbTextField4.text = call.genPaperProb()[4]
+        showProbCheckBox.checked = call.genPaperProb()[5]
+        showProbPageLabel.text = call.genPaperPageNumber()
+    }
+
+    Component.onCompleted: {
+        tabView.handleRefresh.connect(root.refresh)
+    }
+
     SplitView {
         id: spv1
         anchors.top: parent.top
@@ -30,14 +47,16 @@ Rectangle {
             text: qsTr("选择试题")
             onClicked: {
                 call.genPaperChooseProblem(paperName.text)
-                refresh()
+                root.refresh()
             }
         }
     }
 
     SplitView {
         id: spv2
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
         orientation: Qt.Vertical
         visible: call.genPaperStep() === 2
 
@@ -143,16 +162,8 @@ Rectangle {
             orientation: Qt.Horizontal
 
             Button {
-                text: qsTr("刷新状态")
-                width: parent.width / 3
-                onClicked: {
-                    root.refresh()
-                }
-            }
-
-            Button {
                 text: qsTr("添加到试卷")
-                width: parent.width / 3
+                width: parent.width / 2
                 onClicked: {
                     call.genPaperAddToPaper()
                     root.refresh()
@@ -161,7 +172,7 @@ Rectangle {
 
             Button {
                 text: qsTr("试题选择结束")
-                width: parent.width / 3
+                width: parent.width / 2
                 onClicked: {
                     call.genPaperFinish()
                     root.refresh()
@@ -192,18 +203,5 @@ Rectangle {
                 root.refresh()
             }
         }
-    }
-
-    function refresh() {
-        spv1.visible = (call.genPaperStep() === 1)
-        spv2.visible = (call.genPaperStep() === 2)
-        spv3.visible = (call.genPaperStep() === 3)
-        showProbTextArea1.text = call.genPaperProb()[0]
-        showProbTextField1.text = call.genPaperProb()[1]
-        showProbTextField2.text = call.genPaperProb()[2]
-        showProbTextField3.text = call.genPaperProb()[3]
-        showProbTextField4.text = call.genPaperProb()[4]
-        showProbCheckBox.checked = call.genPaperProb()[5]
-        showProbPageLabel.text = call.genPaperPageNumber()
     }
 }

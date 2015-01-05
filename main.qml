@@ -2,7 +2,6 @@ import QtQuick 2.0
 import QtQuick.Controls 1.2
 
 ApplicationWindow {
-    id: root
     visible: true
     width: 640
     height: 480
@@ -13,7 +12,14 @@ ApplicationWindow {
         anchors.fill: parent
         currentIndex: 0
 
+        signal handleRefresh();
+
+        onCurrentIndexChanged: {
+            tabView.handleRefresh()
+        }
+
         Tab {
+            id: tab1
             anchors.fill: parent
             title : qsTr("试题录入")
             ProbSubmit {
@@ -26,8 +32,10 @@ ApplicationWindow {
         }
 
         Tab {
+            id: tab2
             anchors.fill: parent
             title : qsTr("试题维护")
+
             ProbShow {
                 anchors.fill: parent
                 anchors.topMargin: 5
@@ -38,6 +46,7 @@ ApplicationWindow {
         }
 
         Tab {
+            id: tab3
             title : qsTr("生成试卷")
             anchors.fill: parent
             GenPaper {
@@ -53,6 +62,7 @@ ApplicationWindow {
             title : qsTr("考试")
             anchors.fill: parent
             Exam {
+                id: exam
                 anchors.fill: parent
                 anchors.topMargin: 5
                 anchors.leftMargin: 50

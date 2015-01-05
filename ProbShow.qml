@@ -6,9 +6,25 @@ Rectangle {
     width: 538
     height: 405
 
+    function refresh() {
+        showProbTextArea1.text = call.showProb()[0]
+        showProbTextField1.text = call.showProb()[1]
+        showProbTextField2.text = call.showProb()[2]
+        showProbTextField3.text = call.showProb()[3]
+        showProbTextField4.text = call.showProb()[4]
+        showProbCheckBox.checked = call.showProb()[5]
+        showProbPageLabel.text = call.showProbPageNumber()
+    }
+
+    Component.onCompleted: {
+        tabView.handleRefresh.connect(root.refresh)
+    }
+
     SplitView {
         id: showProbSplitView
-        anchors.fill: parent
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
         orientation: Qt.Vertical
 
         Label {
@@ -68,16 +84,6 @@ Rectangle {
             checked: call.showProb()[5]
         }
 
-        function refresh() {
-            showProbTextArea1.text = call.showProb()[0]
-            showProbTextField1.text = call.showProb()[1]
-            showProbTextField2.text = call.showProb()[2]
-            showProbTextField3.text = call.showProb()[3]
-            showProbTextField4.text = call.showProb()[4]
-            showProbCheckBox.checked = call.showProb()[5]
-            showProbPageLabel.text = call.showProbPageNumber()
-        }
-
         SplitView {
             orientation: Qt.Horizontal
             Button {
@@ -87,7 +93,7 @@ Rectangle {
 
                 onClicked: {
                     call.showProbPrev()
-                    showProbSplitView.refresh()
+                    root.refresh()
                 }
             }
 
@@ -106,7 +112,7 @@ Rectangle {
                 width: parent.width / 3
                 onClicked: {
                     call.showProbNext()
-                    showProbSplitView.refresh()
+                    root.refresh()
                 }
             }
         }
@@ -115,16 +121,8 @@ Rectangle {
             orientation: Qt.Horizontal
 
             Button {
-                text: qsTr("刷新状态")
-                width: parent.width / 3
-                onClicked: {
-                    showProbSplitView.refresh()
-                }
-            }
-
-            Button {
                 text: qsTr("更新题目")
-                width: parent.width / 3
+                width: parent.width / 2
                 onClicked: {
                     call.editProblem(
                                 showProbTextArea1.text,
@@ -133,16 +131,16 @@ Rectangle {
                                 showProbTextField3.text,
                                 showProbTextField4.text,
                                 showProbCheckBox.checked)
-                    showProbSplitView.refresh()
+                    root.refresh()
                 }
             }
 
             Button {
                 text: qsTr("删除题目")
-                width: parent.width / 3
+                width: parent.width / 2
                 onClicked: {
                     call.removeProblem()
-                    showProbSplitView.refresh()
+                    root.refresh()
                 }
             }
         }
