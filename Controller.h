@@ -17,7 +17,7 @@ public:
 
     void removeProblem(int index);
     //修改试卷
-    void addPaper(Paper l);
+    void addPaper(const Paper &l);
 
     void editPaper(int index, const Paper &l);
 

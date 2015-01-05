@@ -16,9 +16,7 @@ void Controller::removeProblem(int index) {
 }
 
 //修改试卷
-void Controller::addPaper(Paper l) {
-    qDebug() << "add Paper!" << l.getTitle();
-    qDebug() << "size = " << l.getProb().size();
+void Controller::addPaper(const Paper &l) {
     paper.push_back(l);
 }
 
