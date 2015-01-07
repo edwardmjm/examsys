@@ -135,3 +135,13 @@ QVariantList Caller::genPaperProb() const {
 QStringList Caller::comboBoxModel() const {
     return ctrl->getPaperQStringList();
 }
+
+
+void Caller::save() const {
+    ctrl->save();
+}
+
+void Caller::load() const {
+    ctrl->load();
+}
+

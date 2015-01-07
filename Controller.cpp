@@ -1,5 +1,7 @@
 #include "Controller.h"
 #include <QDebug>
+#include <QFile>
+#include <iostream>
 using namespace std;
 
 //修改题库
@@ -60,3 +62,66 @@ QStringList Controller::getPaperQStringList() {
     }
     return res;
 }
+/*
+void Controller::save() {
+    int a,b,c;
+    int i;
+    a=questionBank.size();
+    b=paper.size();
+    c=result.size();
+
+    QFile file("facts.dat");
+    if(!file.open(QIODevice::WriteOnly)) {
+        std::cerr<<"Cannot open the file"
+        <<qPrintable(file.errorString())
+        <<std::endl;
+        return;
+    }
+
+    out << a;
+    for(i=0;i<a;i++) {
+        out<< questionBank[i];
+    }
+
+    out << b;
+    for(i=0;i<b;i++) {
+        out<<paper[i];
+    }
+
+    out << c;
+    for(i=0;i<c;i++) {
+        out<<result[i];
+    }
+}
+
+void Controller::load() {
+        int a,b,c;
+        QFile file("facts.dat");
+        if (!file.open(QIODevice::ReadOnly)) {
+                 std::cerr << "Cannot open file for reading: "
+                           << qPrintable(file.errorString()) << std::endl;
+            return;
+        }
+
+
+        in >>a;
+        for(i=0;i<a;i++) {
+           in >>questionBank[i];
+        }
+
+        in >> b;
+        for(i=0;i<b;i++) {
+           in >>paper;
+        }
+
+        in >>c;
+        for(i=0;i<c;i++) {
+           in result;
+        }
+
+        return;
+
+}
+*/
+void Controller::save(){}
+void Controller::load(){}

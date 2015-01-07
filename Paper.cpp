@@ -1,6 +1,12 @@
 #include "Paper.h"
 #include <QDebug>
+#include <QVector>
 using namespace std;
+
+Paper::Paper()
+    :_title(""), _l(vector <Problem> ()) {
+
+}
 
 Paper::Paper(QString title, const vector <Problem> &l): _title(title), _l(l) {
 }
@@ -18,4 +24,18 @@ QString Paper::getTitle() {
 
 vector <Problem> &Paper::getProb() {
     return _l;
+}
+
+QDataStream & operator << (QDataStream &stream, const Paper &p) {
+    stream << p._title << QVector <Problem>::fromStdVector(p._l);
+    return stream;
+}
+
+QDataStream & operator >> (QDataStream &stream, Paper &p) {
+    QString title;
+    QVector <Problem> prob;
+    stream >> title;
+    stream >> prob;
+    p = Paper(title, prob.toStdVector());
+    return stream;
 }

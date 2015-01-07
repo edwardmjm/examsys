@@ -6,11 +6,16 @@
 //考生答的一道题
 class Record {
 public:
+    Record();
+
     Record(const Problem &problem, int answer);
 
     Problem getProblem() const;
 
     int getAnswer() const;
+
+    friend QDataStream & operator << (QDataStream &, const Record &);
+    friend QDataStream & operator >> (QDataStream &, Record &);
 
 private:
     Problem _problem; //题目

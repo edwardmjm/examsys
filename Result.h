@@ -7,6 +7,8 @@
 //一张答卷
 class Result {
 public:
+    Result();
+
     Result(const std::vector <Record> &res);
 
     Result(const std::vector <Record> &res, int score);
@@ -16,6 +18,9 @@ public:
     void setScore(int score);
 
     int getScore();
+
+    friend QDataStream & operator << (QDataStream &, const Result &);
+    friend QDataStream & operator >> (QDataStream &, Result &);
 
 private:
     std::vector <Record> _res;   //答案记录

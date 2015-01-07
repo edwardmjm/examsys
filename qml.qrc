@@ -5,5 +5,6 @@
         <file>ProbShow.qml</file>
         <file>GenPaper.qml</file>
         <file>Exam.qml</file>
+        <file>SaveLoad.qml</file>
     </qresource>
 </RCC>

@@ -42,6 +42,9 @@ public:
 
     Q_INVOKABLE QStringList comboBoxModel() const ;
 
+    Q_INVOKABLE void save() const ;
+    Q_INVOKABLE void load() const ;
+
 private:
     void refresh() const ;
     void showProbRefresh() const ;

@@ -7,10 +7,15 @@
 //试题集合
 class Paper {
 public:
+    Paper();
     Paper(QString title, const std::vector <Problem> &l);
     Paper(QString title, const std::set <int> &, const std::vector <Problem> &);
     QString getTitle();
     std::vector <Problem> &getProb();
+
+    friend QDataStream & operator << (QDataStream &, const Paper &);
+    friend QDataStream & operator >> (QDataStream &, Paper &);
+
 private:
     QString _title;
     std::vector <Problem> _l;

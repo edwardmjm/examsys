@@ -1,6 +1,11 @@
 #include "Problem.h"
 #include <cassert>
+#include <QVector>
 using namespace std;
+
+Problem::Problem()
+    :_problem(""), _answer(vector<QString> ()) {
+}
 
 Problem::Problem(QString problem, std::vector<QString> answer)
     :_problem(problem), _answer(answer) {
@@ -71,4 +76,17 @@ bool Problem::isJudge() const {
 
 bool Problem::isChoose() const {
     return _answer.size() == 4;
+}
+
+QDataStream & operator << (QDataStream &stream, const Problem &p) {
+    stream << p.getProblem() << QVector <QString>::fromStdVector(p.getAnswer());
+    return stream;
+}
+
+QDataStream & operator >> (QDataStream &stream, Problem &p) {
+    QString prob;
+    QVector <QString> answer;
+    stream >> prob >> answer;
+    p = Problem(prob, answer.toStdVector());
+    return stream;
 }

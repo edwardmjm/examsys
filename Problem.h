@@ -9,6 +9,8 @@ const int CHOOSE_PROB_ANS_NUM = 4;
 //一道试题
 class Problem {
 public:
+    Problem();
+
     Problem(QString problem, std::vector<QString> answer);
 
     Problem(const QString &prob, const QString &answer0, const QString &answer1, const QString &answer2, const QString &answer3, const bool &checked);
@@ -24,6 +26,9 @@ public:
     QVariantList toQVL() const ;
 
     static QVariantList emptyQVL();
+
+    friend QDataStream & operator << (QDataStream &, const Problem &);
+    friend QDataStream & operator >> (QDataStream &, Problem &);
 
 private:
     bool isJudge() const ;

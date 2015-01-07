@@ -76,5 +76,17 @@ ApplicationWindow {
         Tab {
             title : qsTr("成绩")
         }
+
+        Tab {
+            title : qsTr("保存/读取")
+            SaveLoad {
+                id: saveload
+                anchors.fill: parent
+                anchors.topMargin: 5
+                anchors.leftMargin: 50
+                anchors.rightMargin: 50
+                anchors.bottomMargin: 50
+            }
+        }
     }
 }
