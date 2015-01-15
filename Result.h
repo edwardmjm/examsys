@@ -10,11 +10,8 @@
 class Result {
 public:
     Result();
-
     Result(const std::vector <Record> &res);
-
     Result(const std::vector <Record> &res, int score);
-
     Result(const std::map <int, Record> &, const Paper &, QString);
 
     std::vector <Record> &get();
@@ -25,7 +22,7 @@ public:
 
     int size() const ;
 
-    int getScore();
+    int getScore() const ;
 
     QString getStudentId() const ;
 

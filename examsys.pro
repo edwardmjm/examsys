@@ -31,3 +31,5 @@ HEADERS += \
     UIState.h \
     Util.h \
     Paper.h
+
+QMAKE_CXXFLAGS += -std=c++11

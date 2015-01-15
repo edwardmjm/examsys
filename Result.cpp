@@ -27,7 +27,7 @@ void Result::printInfo() const {
     }
 }
 
-int Result::getScore() {
+int Result::getScore() const {
     return _score;
 }
 

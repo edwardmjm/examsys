@@ -7,7 +7,6 @@
 class Record {
 public:
     Record();
-
     Record(const Problem &problem, int answer);
 
     Problem getProblem() const;
