@@ -6,5 +6,6 @@
         <file>GenPaper.qml</file>
         <file>Exam.qml</file>
         <file>SaveLoad.qml</file>
+        <file>Check.qml</file>
     </qresource>
 </RCC>

@@ -41,6 +41,20 @@ public:
     Q_INVOKABLE QVariantList genPaperProb() const ;
 
     Q_INVOKABLE QStringList comboBoxModel() const ;
+    Q_INVOKABLE void enterExamMode(QString studentId, int paperId) const ;
+    Q_INVOKABLE QVariantList examProb() const ;
+    Q_INVOKABLE QString examProbPageNumber() const ;
+    Q_INVOKABLE void examProbNext() const ;
+    Q_INVOKABLE void examProbPrev() const ;
+    Q_INVOKABLE void examAddRecord(QString);
+    Q_INVOKABLE void submitSolution();
+
+    Q_INVOKABLE QVariantList checkProb() const ;
+    Q_INVOKABLE QString checkProbPageNumber() const ;
+    Q_INVOKABLE void setCheckId(int) const ;
+    Q_INVOKABLE void checkProbPrev() const ;
+    Q_INVOKABLE void checkProbNext() const ;
+    Q_INVOKABLE QStringList resultComboBoxModel() const ;
 
     Q_INVOKABLE void save() const ;
     Q_INVOKABLE void load() const ;
@@ -49,6 +63,8 @@ private:
     void refresh() const ;
     void showProbRefresh() const ;
     void genPaperRefresh() const ;
+    void examRefresh() const ;
+    void checkRefresh() const ;
 
     Controller *ctrl;
     UIState *state;

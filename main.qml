@@ -14,6 +14,8 @@ ApplicationWindow {
 
         signal handleRefresh();
 
+        property int examMode: 0
+
         onCurrentIndexChanged: {
             tabView.handleRefresh()
         }
@@ -62,7 +64,6 @@ ApplicationWindow {
             title : qsTr("考试")
             anchors.fill: parent
             Exam {
-                id: exam
                 anchors.fill: parent
                 anchors.topMargin: 5
                 anchors.leftMargin: 50
@@ -70,17 +71,21 @@ ApplicationWindow {
                 anchors.bottomMargin: 50
             }
         }
+
         Tab {
-            title : qsTr("评分")
-        }
-        Tab {
-            title : qsTr("成绩")
+            title : qsTr("查看试卷")
+            Check {
+                anchors.fill: parent
+                anchors.topMargin: 5
+                anchors.leftMargin: 50
+                anchors.rightMargin: 50
+                anchors.bottomMargin: 50
+            }
         }
 
         Tab {
             title : qsTr("保存/读取")
             SaveLoad {
-                id: saveload
                 anchors.fill: parent
                 anchors.topMargin: 5
                 anchors.leftMargin: 50

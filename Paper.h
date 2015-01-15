@@ -10,8 +10,9 @@ public:
     Paper();
     Paper(QString title, const std::vector <Problem> &l);
     Paper(QString title, const std::set <int> &, const std::vector <Problem> &);
-    QString getTitle();
+    QString getTitle() const;
     std::vector <Problem> &getProb();
+    const std::vector <Problem> &getProb() const ;
 
     friend QDataStream & operator << (QDataStream &, const Paper &);
     friend QDataStream & operator >> (QDataStream &, Paper &);

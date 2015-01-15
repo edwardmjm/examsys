@@ -7,6 +7,7 @@ Rectangle {
     height: 405
 
     function refresh() {
+        showProbSplitView.visible = tabView.examMode === 0
         showProbTextArea1.text = call.showProb()[0]
         showProbTextField1.text = call.showProb()[1]
         showProbTextField2.text = call.showProb()[2]
@@ -26,6 +27,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         orientation: Qt.Vertical
+        visible: tabView.examMode === 0
 
         Label {
             text: qsTr("试题")

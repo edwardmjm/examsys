@@ -6,12 +6,20 @@ Rectangle {
     width: 538
     height: 405
 
+    function refresh() {
+        splitView1.visible = tabView.examMode === 0
+    }
+
+    Component.onCompleted: {
+        tabView.handleRefresh.connect(root.refresh)
+    }
+
     SplitView {
         id: splitView1
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        visible: true
+        visible: tabView.examMode === 0
         orientation: Qt.Vertical
 
         Label {

@@ -7,9 +7,9 @@ Rectangle {
     height: 405
 
     function refresh() {
-        spv1.visible = (call.genPaperStep() === 1)
-        spv2.visible = (call.genPaperStep() === 2)
-        spv3.visible = (call.genPaperStep() === 3)
+        spv1.visible = (call.genPaperStep() === 1 && tabView.examMode === 0)
+        spv2.visible = (call.genPaperStep() === 2 && tabView.examMode === 0)
+        spv3.visible = (call.genPaperStep() === 3 && tabView.examMode === 0)
         showProbTextArea1.text = call.genPaperProb()[0]
         showProbTextField1.text = call.genPaperProb()[1]
         showProbTextField2.text = call.genPaperProb()[2]
@@ -31,7 +31,7 @@ Rectangle {
         anchors.leftMargin: parent.width / 3
         anchors.rightMargin: parent.width / 3
         orientation: Qt.Vertical
-        visible: call.genPaperStep() === 1
+        visible: call.genPaperStep() === 1 && tabView.examMode === 0
 
         Label {
             text: qsTr("试卷名称")
@@ -58,7 +58,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.top: parent.top
         orientation: Qt.Vertical
-        visible: call.genPaperStep() === 2
+        visible: call.genPaperStep() === 2 && tabView.examMode === 0
 
         Label {
             text: qsTr("试题")
@@ -189,7 +189,7 @@ Rectangle {
         anchors.leftMargin: parent.width / 3
         anchors.rightMargin: parent.width / 3
         orientation: Qt.Vertical
-        visible: call.genPaperStep() === 3
+        visible: call.genPaperStep() === 3 && tabView.examMode === 0
 
         Label {
             text: qsTr("添加试卷成功")

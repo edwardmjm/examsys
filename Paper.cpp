@@ -18,11 +18,15 @@ Paper::Paper(QString title, const std::set <int> &s, const vector <Problem> &v):
     }
 }
 
-QString Paper::getTitle() {
+QString Paper::getTitle() const {
     return _title;
 }
 
 vector <Problem> &Paper::getProb() {
+    return _l;
+}
+
+const std::vector <Problem> &Paper::getProb() const {
     return _l;
 }
 

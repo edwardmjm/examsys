@@ -64,6 +64,8 @@ void Caller::showProbNext() const {
 void Caller::refresh() const {
     showProbRefresh();
     genPaperRefresh();
+    examRefresh();
+    checkRefresh();
 }
 
 void Caller::showProbRefresh() const {
@@ -78,6 +80,23 @@ void Caller::genPaperRefresh() const {
     cur = min(cur, (int)ctrl->getQuestionBank().size());
     cur = max(cur, 1);
     state->setGenPaperPage(cur);
+}
+
+void Caller::examRefresh() const {
+    int cur = state->getExamProbPage();
+    int all = (int)ctrl->getPaper().size() > state->getExamPaperId() ? ctrl->getPaper()[state->getExamPaperId()].getProb().size() : 0;
+    cur = min(cur, all);
+    cur = max(cur, 1);
+    state->setExamProbPage(cur);
+}
+
+void Caller::checkRefresh() const {
+    int cur = state->getCheckPage();
+    std::vector <Result> &res = ctrl->getResult();
+    int all = (int)res.size() > state->getCheckId() ? res[state->getCheckId()].size() : 0;
+    cur = min(cur, all);
+    cur = max(cur, 1);
+    state->setCheckPage(cur);
 }
 
 void Caller::genPaperSetTitle() const {
@@ -145,3 +164,95 @@ void Caller::load() const {
     ctrl->load();
 }
 
+void Caller::enterExamMode(QString studentId, int paperId) const {
+    state->setStudentId(studentId);
+    state->setExamPaperId(paperId);
+    state->getRecord().clear();
+}
+
+
+QVariantList Caller::examProb() const {
+    refresh();
+    QVariantList res;
+    int currentPage = state->getExamProbPage();
+    int allPage = (int)ctrl->getPaper().size() > state->getExamPaperId() ? ctrl->getPaper()[state->getExamPaperId()].getProb().size() : 0;
+    if (currentPage > allPage) {
+        res = Problem::emptyQVL();
+    } else {
+        res = ctrl->getPaper()[state->getExamPaperId()].getProb()[currentPage - 1].toQVL();
+    }
+    return res;
+}
+
+QString Caller::examProbPageNumber() const {
+    refresh();
+    int currentPage = state->getExamProbPage();
+    int allPage = (int)ctrl->getPaper().size() > state->getExamPaperId() ? ctrl->getPaper()[state->getExamPaperId()].getProb().size() : 0;
+    return Util::toString(currentPage) + "/" + Util::toString(allPage);
+}
+
+void Caller::examProbNext() const {
+    state->setExamProbPage(state->getExamProbPage() + 1);
+    refresh();
+}
+
+void Caller::examProbPrev() const {
+    state->setExamProbPage(state->getExamProbPage() - 1);
+    refresh();
+}
+
+void Caller::examAddRecord(QString answer) {
+    int v = Util::toInt(answer);
+    if (0 <= v && v < 4) {
+        Problem &pr = ctrl->getPaper()[state->getExamPaperId()].getProb()[state->getExamProbPage() - 1];
+        state->getRecord()[state->getExamProbPage()] = Record(pr, v);
+    }
+}
+
+void Caller::submitSolution() {
+    ctrl->addResult(Result(state->getRecord(), ctrl->getPaper()[state->getExamPaperId()], state->getStudentId()));
+}
+
+QVariantList Caller::checkProb() const {
+    QVariantList ret;
+    int cur = state->getCheckPage();
+    std::vector <Result> &res = ctrl->getResult();
+    int all = (int)res.size() > state->getCheckId() ? res[state->getCheckId()].size() : 0;
+    if (cur > all) {
+        ret = Problem::emptyQVL();
+        ret.append(QString(""));
+    } else {
+        ret = res[state->getCheckId()].toQVL(state->getCheckPage() - 1);
+    }
+    return ret;
+}
+
+QString Caller::checkProbPageNumber() const {
+    refresh();
+    int cur = state->getCheckPage();
+    std::vector <Result> &res = ctrl->getResult();
+    int all = (int)res.size() > state->getCheckId() ? res[state->getCheckId()].size() : 0;
+    return Util::toString(cur) + "/" + Util::toString(all);
+}
+
+void Caller::setCheckId(int idx) const {
+    state->setCheckId(idx);
+}
+
+void Caller::checkProbPrev() const {
+    state->setCheckPage(state->getCheckPage() - 1);
+    refresh();
+}
+
+void Caller::checkProbNext() const {
+    state->setCheckPage(state->getCheckPage() + 1);
+    refresh();
+}
+
+QStringList Caller::resultComboBoxModel() const {
+    QStringList ret;
+    for (Result &u : ctrl->getResult()) {
+        ret.append(QString(u.getStudentId() + " - " + u.getPaperTitle()));
+    }
+    return ret;
+}

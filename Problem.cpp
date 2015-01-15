@@ -1,6 +1,7 @@
 #include "Problem.h"
 #include <cassert>
 #include <QVector>
+#include <QDebug>
 using namespace std;
 
 Problem::Problem()
@@ -55,6 +56,8 @@ QVariantList Problem::toQVL() const {
         }
         res.append(false);
     } else {
+        qDebug() << _answer.size();
+        //for (int i = 0; i < _answer.size(); i++) qDebug() << _answer[i];
         assert(0);
     }
     return res;
@@ -76,6 +79,10 @@ bool Problem::isJudge() const {
 
 bool Problem::isChoose() const {
     return _answer.size() == 4;
+}
+
+bool Problem::operator == (const Problem &oth) const {
+    return _problem == oth._problem && _answer == oth._answer;
 }
 
 QDataStream & operator << (QDataStream &stream, const Problem &p) {

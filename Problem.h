@@ -25,6 +25,8 @@ public:
 
     QVariantList toQVL() const ;
 
+    bool operator == (const Problem &oth) const ;
+
     static QVariantList emptyQVL();
 
     friend QDataStream & operator << (QDataStream &, const Problem &);

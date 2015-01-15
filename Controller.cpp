@@ -33,6 +33,7 @@ void Controller::removePaper(int index) {
 //修改答卷
 void Controller::addResult(const Result &res) {
     result.push_back(res);
+    res.printInfo();
 }
 
 void Controller::editResult(int index, const Result &res) {
@@ -62,9 +63,9 @@ QStringList Controller::getPaperQStringList() {
     }
     return res;
 }
-/*
+
 void Controller::save() {
-    int a,b,c;
+    int a, b, c;
     int i;
     a=questionBank.size();
     b=paper.size();
@@ -78,50 +79,50 @@ void Controller::save() {
         return;
     }
 
+    QDataStream out(&file);
     out << a;
-    for(i=0;i<a;i++) {
-        out<< questionBank[i];
+    for(i = 0; i < a; i++) {
+        out << questionBank[i];
     }
 
     out << b;
-    for(i=0;i<b;i++) {
-        out<<paper[i];
+    for(i = 0; i < b; i++) {
+        out << paper[i];
     }
 
     out << c;
-    for(i=0;i<c;i++) {
-        out<<result[i];
+    for(i = 0; i < c; i++) {
+        out << result[i];
     }
 }
 
 void Controller::load() {
-        int a,b,c;
-        QFile file("facts.dat");
-        if (!file.open(QIODevice::ReadOnly)) {
-                 std::cerr << "Cannot open file for reading: "
-                           << qPrintable(file.errorString()) << std::endl;
-            return;
-        }
-
-
-        in >>a;
-        for(i=0;i<a;i++) {
-           in >>questionBank[i];
-        }
-
-        in >> b;
-        for(i=0;i<b;i++) {
-           in >>paper;
-        }
-
-        in >>c;
-        for(i=0;i<c;i++) {
-           in result;
-        }
-
+    int a, b, c;
+    int i;
+    QFile file("facts.dat");
+    if (!file.open(QIODevice::ReadOnly)) {
+             std::cerr << "Cannot open file for reading: "
+                       << qPrintable(file.errorString()) << std::endl;
         return;
+    }
 
+    QDataStream in(&file);
+    in >> a;
+    questionBank.resize(a);
+    for(i = 0; i < a; i++) {
+       in >> questionBank[i];
+    }
+
+    in >> b;
+    paper.resize(b);
+    for(i = 0; i < b; i++) {
+       in >> paper[i];
+    }
+
+    in >> c;
+    result.resize(c);
+    for(i = 0; i < c; i++) {
+       in >> result[i];
+    }
 }
-*/
-void Controller::save(){}
-void Controller::load(){}
+

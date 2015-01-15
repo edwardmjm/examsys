@@ -9,21 +9,23 @@ Rectangle {
     property int step: 1
 
     function refresh() {
-        cb.model = call.comboBoxModel();
-        spv1.visible = step === 1
-        spv2.visible = step === 2
-        p0.text = call.examProb()[0]
-        p1.text = call.examProb()[1]
-        p2.text = call.examProb()[2]
-        p3.text = call.examProb()[3]
-        p4.text = call.examProb()[4]
-        p5.text = call.examProb()[5]
-        pageInfo.text = call.examProbPageNumber()
+        cb.model = call.resultComboBoxModel();
+        spv1.visible = step === 1 && tabView.examMode === 0
+        spv2.visible = step === 2 && tabView.examMode === 0
+        p0.text = call.checkProb()[0]
+        p1.text = call.checkProb()[1]
+        p2.text = call.checkProb()[2]
+        p3.text = call.checkProb()[3]
+        p4.text = call.checkProb()[4]
+        p5.text = call.checkProb()[5]
+        p6.text = call.checkProb()[6]
+        pageInfo.text = call.checkProbPageNumber()
     }
 
     Component.onCompleted: {
         tabView.handleRefresh.connect(root.refresh)
     }
+
 
     SplitView {
         id: spv1
@@ -33,35 +35,18 @@ Rectangle {
         anchors.leftMargin: parent.width / 3
         anchors.rightMargin: parent.width / 3
         orientation: Qt.Vertical
-        visible: root.step === 1
-
-        Label {
-            text: qsTr("选择试卷")
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-        }
+        visible: root.step === 1 && tabView.examMode === 0
 
         ComboBox {
             id: cb
-            model: call.comboBoxModel()
-        }
-
-        Label {
-            text: qsTr("学号")
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-        }
-
-        TextField {
-            id: studentId
+            model: call.resultComboBoxModel()
         }
 
         Button {
-            text: qsTr("进入考试")
+            text: qsTr("查看")
             onClicked: {
-                tabView.examMode = 1
+                call.setCheckId(cb.currentIndex)
                 root.step = 2
-                call.enterExamMode(studentId.text, cb.currentIndex)
                 root.refresh()
             }
         }
@@ -73,7 +58,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         orientation: Qt.Vertical
-        visible: step === 2
+        visible: root.step === 2 && tabView.examMode === 0
 
         Label {
             text: qsTr("试题")
@@ -83,8 +68,7 @@ Rectangle {
 
         TextArea {
             id: p0
-            text: call.examProb()[0]
-            readOnly: true
+            text: call.checkProb()[0]
         }
 
         Label {
@@ -93,20 +77,18 @@ Rectangle {
 
         TextField {
             id: p1
-            text: call.examProb()[1]
-            readOnly: true
+            text: call.checkProb()[1]
         }
 
         Label {
-            id: showProbLabel3
             text: qsTr("B")
         }
 
         TextField {
             id: p2
-            text: call.examProb()[2]
-            readOnly: true
+            text: call.checkProb()[2]
         }
+
 
         Label {
             text: qsTr("C")
@@ -114,9 +96,9 @@ Rectangle {
 
         TextField {
             id: p3
-            text: call.examProb()[3]
-            readOnly: true
+            text: call.checkProb()[3]
         }
+
 
         Label {
             text: qsTr("D")
@@ -124,25 +106,23 @@ Rectangle {
 
         TextField {
             id: p4
-            text: call.examProb()[4]
-            readOnly: true
+            text: call.checkProb()[4]
         }
+
 
         CheckBox {
             id: p5
             text: qsTr("是否判断题(如果是，则只有AB选项有作用)")
-            checked: call.examProb()[5]
-            onClicked: {
-                checked = call.examProb()[5]
-            }
+            checked: call.checkProb()[5]
         }
 
         Label {
-            text: qsTr("你的答案(输入0~3分别表示选择第几个答案)")
+            text: qsTr("考生答案")
         }
 
         TextField {
-            id: answer
+            id: p6
+            text: call.checkProb()[6]
         }
 
         SplitView {
@@ -152,15 +132,14 @@ Rectangle {
                 width: parent.width / 3
 
                 onClicked: {
-                    call.examAddRecord(answer.text)
-                    call.examProbPrev()
+                    call.checkProbPrev()
                     root.refresh()
                 }
             }
 
             Label {
                 id: pageInfo
-                text: call.examProbPageNumber()
+                text: call.checkProbPageNumber()
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
                 width: parent.width / 3
@@ -171,21 +150,20 @@ Rectangle {
                 text: qsTr("后一题")
                 width: parent.width / 3
                 onClicked: {
-                    call.examAddRecord(answer.text)
-                    call.examProbNext()
+                    call.checkProbNext()
                     root.refresh()
                 }
             }
         }
+
         Button {
-            text: qsTr("交卷")
+            text: qsTr("返回")
             onClicked: {
-                call.examAddRecord(answer.text)
-                call.submitSolution()
                 root.step = 1
-                tabView.examMode = 0
                 root.refresh()
             }
         }
     }
+
 }
+
