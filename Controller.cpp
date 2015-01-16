@@ -71,7 +71,7 @@ void Controller::save() {
     b=paper.size();
     c=result.size();
 
-    QFile file("/tmp/examsys.dat");
+    QFile file("examsys.dat");
     if(!file.open(QIODevice::WriteOnly)) {
         std::cerr<<"Cannot open the file"
         <<qPrintable(file.errorString())
@@ -99,7 +99,7 @@ void Controller::save() {
 void Controller::load() {
     int a, b, c;
     int i;
-    QFile file("/tmp/examsys.dat");
+    QFile file("examsys.dat");
     if (!file.open(QIODevice::ReadOnly)) {
              std::cerr << "Cannot open file for reading: "
                        << qPrintable(file.errorString()) << std::endl;
