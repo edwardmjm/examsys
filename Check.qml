@@ -17,7 +17,7 @@ Rectangle {
         p2.text = call.checkProb()[2]
         p3.text = call.checkProb()[3]
         p4.text = call.checkProb()[4]
-        p5.text = call.checkProb()[5]
+        p5.checked = call.checkProb()[5]
         p6.text = call.checkProb()[6]
         pageInfo.text = call.checkProbPageNumber()
     }
